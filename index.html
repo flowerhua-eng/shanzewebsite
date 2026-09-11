@@ -169,6 +169,23 @@
   }
   .search button svg{ width:22px; height:22px; stroke:var(--ink); }
   .search:focus-within{ outline:3px solid var(--seal-red); outline-offset:2px; }
+  .search-wrap{ position:relative; max-width:1120px; }
+  .search-results{
+    position:absolute; top:calc(100% + 6px); left:0; right:0;
+    background:var(--paper); border:1px solid rgba(26,22,22,.18);
+    box-shadow:0 14px 40px rgba(26,22,22,.14);
+    max-height:360px; overflow-y:auto; z-index:30;
+  }
+  .search-results a{
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    padding:14px 24px; text-decoration:none; color:var(--ink);
+    border-bottom:1px solid rgba(26,22,22,.08); font-family:var(--sans);
+  }
+  .search-results a:last-child{ border-bottom:none; }
+  .search-results a:hover, .search-results a.is-active{ background:rgba(26,22,22,.05); }
+  .search-results .r-title{ font-size:15px; }
+  .search-results .r-cat{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:#8a8a8a; white-space:nowrap; }
+  .search-results .r-empty{ padding:16px 24px; font-family:var(--sans); font-size:14px; color:#8a8a8a; }
 
   /* Feature stories */
   .stories{
@@ -349,15 +366,78 @@
 
     <div class="hero-inner">
 
-      <form class="search" role="search" onsubmit="return false;">
-        <input type="search" placeholder="How can we help you today?" aria-label="Search the site">
-        <button type="submit" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
-            <circle cx="11" cy="11" r="7"/>
-            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
-          </svg>
-        </button>
-      </form>
+      <div class="search-wrap">
+        <form class="search" role="search" id="siteSearchForm">
+          <input type="search" id="siteSearchInput" placeholder="How can we help you today?" aria-label="Search the site" autocomplete="off">
+          <button type="submit" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="7"/>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+            </svg>
+          </button>
+        </form>
+        <div class="search-results" id="siteSearchResults" hidden></div>
+      </div>
+
+      <script>
+      (function(){
+        var SITE_PAGES = [
+          { title: "Home", url: "index.html", cat: "Page", tags: "home shanze partners" },
+          { title: "Our People", url: "attorneys.html", cat: "Page", tags: "attorneys lawyers team people staff" },
+          { title: "Zhizhou (Leo) Wang", url: "attorney-leo-wang.html", cat: "Attorney", tags: "leo wang managing partner corporate estate planning dispute resolution bankruptcy" },
+          { title: "Xinyuan (Echo) Zhang", url: "attorney-echo-zhang.html", cat: "Attorney", tags: "echo zhang associate civil litigation bankruptcy" },
+          { title: "Zhuofan (Flower) Hua", url: "attorney-flower-hua.html", cat: "Attorney", tags: "flower hua management analyst" },
+          { title: "Zhenyuan (Lizzy) Li", url: "attorney-lizzy-li.html", cat: "Attorney", tags: "lizzy li attorney" },
+          { title: "Siyuan (Clara) Chen", url: "attorney-clara-chen.html", cat: "Attorney", tags: "clara chen attorney" },
+          { title: "Vanessa Yang", url: "attorney-vanessa-yang.html", cat: "Attorney", tags: "vanessa yang attorney" },
+          { title: "Practice Areas", url: "practice-areas.html", cat: "Page", tags: "practice areas overview services" },
+          { title: "Corporate & Transactional", url: "practice-corporate-transactional.html", cat: "Practice Area", tags: "corporate transactional business formation contracts" },
+          { title: "Dispute Resolution", url: "practice-dispute-resolution.html", cat: "Practice Area", tags: "dispute resolution litigation civil lawsuit court" },
+          { title: "Estate Planning & Probate", url: "practice-estate-planning.html", cat: "Practice Area", tags: "estate planning probate wills trusts" },
+          { title: "Real Estate", url: "practice-real-estate.html", cat: "Practice Area", tags: "real estate property commercial tenancy" },
+          { title: "Bankruptcy", url: "practice-bankruptcy.html", cat: "Practice Area", tags: "bankruptcy debtor creditor receivership" },
+          { title: "Immigration", url: "practice-immigration.html", cat: "Practice Area", tags: "immigration visa green card" },
+          { title: "Case Results & Insights", url: "insights.html", cat: "Page", tags: "insights case results client alerts news articles" },
+          { title: "Contact", url: "contact.html", cat: "Page", tags: "contact consultation phone email office address" }
+        ];
+
+        var input = document.getElementById('siteSearchInput');
+        var results = document.getElementById('siteSearchResults');
+        var form = document.getElementById('siteSearchForm');
+        if(!input || !results || !form) return;
+
+        function render(query){
+          var q = query.trim().toLowerCase();
+          if(!q){ results.hidden = true; results.innerHTML = ''; return; }
+
+          var matches = SITE_PAGES.filter(function(p){
+            return (p.title + ' ' + p.tags).toLowerCase().indexOf(q) !== -1;
+          }).slice(0, 8);
+
+          if(!matches.length){
+            results.innerHTML = '<div class="r-empty">No pages found for &ldquo;' + query + '&rdquo;</div>';
+          } else {
+            results.innerHTML = matches.map(function(p){
+              return '<a href="' + p.url + '"><span class="r-title">' + p.title + '</span><span class="r-cat">' + p.cat + '</span></a>';
+            }).join('');
+          }
+          results.hidden = false;
+        }
+
+        input.addEventListener('input', function(){ render(input.value); });
+        input.addEventListener('focus', function(){ if(input.value.trim()) render(input.value); });
+
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var first = results.querySelector('a');
+          if(first) window.location.href = first.getAttribute('href');
+        });
+
+        document.addEventListener('click', function(e){
+          if(!form.parentElement.contains(e.target)) { results.hidden = true; }
+        });
+      })();
+      </script>
 
       <div class="stories">
         <a class="story active" href="#" data-bg="0">
