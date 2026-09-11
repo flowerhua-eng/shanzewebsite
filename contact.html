@@ -310,35 +310,82 @@
         <!-- FORM -->
         <div>
           <p class="kicker">Request a Consultation</p>
-          <form onsubmit="return false;">
+          <form id="contactForm">
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+            <input type="hidden" name="subject" value="New consultation request from shanzepartners.com">
+            <input type="hidden" name="from_name" value="Shanze Partners Website">
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-row">
               <div class="form-field">
                 <label for="fn">First Name</label>
-                <input id="fn" type="text" autocomplete="given-name" placeholder="Jane">
+                <input id="fn" name="first_name" type="text" autocomplete="given-name" placeholder="Jane" required>
               </div>
               <div class="form-field">
                 <label for="ln">Last Name</label>
-                <input id="ln" type="text" autocomplete="family-name" placeholder="Doe">
+                <input id="ln" name="last_name" type="text" autocomplete="family-name" placeholder="Doe" required>
               </div>
             </div>
             <div class="form-row">
               <div class="form-field">
                 <label for="em">Email</label>
-                <input id="em" type="email" autocomplete="email" placeholder="you@example.com">
+                <input id="em" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
               </div>
               <div class="form-field">
                 <label for="ph">Phone</label>
-                <input id="ph" type="tel" autocomplete="tel" placeholder="(206) 555-0100">
+                <input id="ph" name="phone" type="tel" autocomplete="tel" placeholder="(206) 555-0100">
               </div>
             </div>
             <div class="form-field">
               <label for="msg">How can we help?</label>
-              <textarea id="msg" placeholder="Briefly describe your matter. Please do not include confidential or time-sensitive details in this first message."></textarea>
+              <textarea id="msg" name="message" placeholder="Briefly describe your matter. Please do not include confidential or time-sensitive details in this first message." required></textarea>
             </div>
             <button class="submit" type="submit">Send Message</button>
             <p class="consent">Submitting this form does not create an attorney–client relationship. Please do not send confidential information until a formal engagement is in place.</p>
+            <p id="formStatus" role="status" aria-live="polite" style="margin-top:0.75rem;font-size:0.95em;"></p>
           </form>
         </div>
+
+        <script>
+        (function(){
+          var form = document.getElementById('contactForm');
+          var status = document.getElementById('formStatus');
+          if(!form) return;
+          form.addEventListener('submit', function(e){
+            e.preventDefault();
+            var btn = form.querySelector('button.submit');
+            var originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            status.textContent = '';
+            status.style.color = '';
+
+            fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              headers: { 'Accept': 'application/json' },
+              body: new FormData(form)
+            })
+            .then(function(res){ return res.json(); })
+            .then(function(data){
+              if (data.success) {
+                status.style.color = '#2e7d32';
+                status.textContent = "Thank you — your message has been sent. We'll be in touch soon.";
+                form.reset();
+              } else {
+                status.style.color = '#b3261e';
+                status.textContent = 'Something went wrong sending your message. Please try again or email us directly.';
+              }
+            })
+            .catch(function(){
+              status.style.color = '#b3261e';
+              status.textContent = 'Something went wrong sending your message. Please try again or email us directly.';
+            })
+            .finally(function(){
+              btn.disabled = false;
+              btn.textContent = originalText;
+            });
+          });
+        })();
+        </script>
 
         <!-- INFO -->
         <div>
