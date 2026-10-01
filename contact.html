@@ -259,6 +259,9 @@
     background:#EDE6DC; margin-top:8px;
   }
   .map-frame svg{ width:100%; height:100%; display:block; }
+  .office-note{
+    font-size:13px; font-style:italic; color:var(--charcoal); opacity:.8; margin-top:6px;
+  }
   .hours-list{ list-style:none; }
   .hours-list li{
     display:flex; justify-content:space-between; gap:20px; padding:7px 0;
@@ -395,6 +398,12 @@
             <p>Shanze Partners PLLC<br>Attorneys at Law<br>701 5th Avenue, Suite 4200<br>Seattle, WA 98104</p>
           </div>
           <div class="info-block">
+            <p class="info-label">Office</p>
+            <h3>Bellevue</h3>
+            <p>Shanze Partners PLLC<br>Attorneys at Law<br>2018 156th Avenue NE, Building F, #100<br>Bellevue, WA 98007</p>
+            <p class="office-note">By appointment only &mdash; reservation required.</p>
+          </div>
+          <div class="info-block">
             <p class="info-label">Reach Us</p>
             <p>
               <a href="tel:+12062627488">Office: 206.262.7488</a><br>
@@ -402,10 +411,16 @@
             </p>
           </div>
           <div class="info-block">
-            <p class="info-label">Find Us</p>
+            <p class="info-label">Find Us &mdash; Seattle</p>
             <div class="map-frame" aria-label="Map showing Shanze Partners PLLC office location in Seattle">
         <img src="images/office-map.png" alt="Map showing Shanze Partners PLLC, 701 5th Ave, Suite 4200, Seattle, WA" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
+          </div>
+          <div class="info-block">
+            <p class="info-label">Find Us &mdash; Bellevue</p>
+            <div class="map-frame" aria-label="Map showing Shanze Partners PLLC Bellevue office location">
+              <iframe src="https://www.google.com/maps?q=2018+156th+Avenue+NE,+Bellevue,+WA+98007&output=embed" style="width:100%;height:100%;border:0;display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Shanze Partners PLLC, 2018 156th Avenue NE, Building F #100, Bellevue, WA"></iframe>
+            </div>
           </div>
         </div>
 
