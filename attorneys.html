@@ -248,9 +248,6 @@
     width:100%; aspect-ratio:192/232; overflow:hidden; background:#fff;
   }
   .p-photo svg{ width:100%; height:100%; display:block; }
-  .p-photo img{ filter:grayscale(1); transition:filter .4s ease; }
-  .person:hover .p-photo img, .p-photo-link:focus-visible .p-photo img{ filter:grayscale(0); }
-  @media (hover:none){ .p-photo img{ filter:none; } }
   .p-info{
     background:var(--ink); color:var(--ivory);
     padding:26px 24px 28px;
@@ -365,13 +362,6 @@
       </div>
     </header>
     <section class="section">
-      <div class="people-tools">
-        <div class="people-search">
-          <input type="search" placeholder="Search by name" aria-label="Search attorneys by name">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
-        </div>
-      </div>
-
       <p class="count">Showing 1&ndash;5 of 5 Results &nbsp;&middot;&nbsp; Seattle</p>
 
       <div class="people-list">
