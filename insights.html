@@ -297,6 +297,27 @@
   .review-name{ font-weight:700; color:var(--ink); }
   .review-date{ color:var(--charcoal); white-space:nowrap; }
 
+
+  /* ===== latest feed ===== */
+  .feed{ border-top:1px solid rgba(26,22,22,.35); }
+  .feed-item{
+    display:block; padding:34px 4px 38px; text-decoration:none; color:var(--ink);
+    border-bottom:1px solid rgba(26,22,22,.35); transition:background .2s ease;
+  }
+  .feed-item:hover{ background:var(--ivory); }
+  .feed-item:focus-visible{ outline:2px solid var(--seal-red); outline-offset:-2px; }
+  .feed-meta{ display:flex; flex-wrap:wrap; gap:6px 18px; font-size:11px; letter-spacing:.25em; text-transform:uppercase; margin:0; }
+  .feed-cat{ font-weight:700; color:var(--seal-red); }
+  .feed-date{ color:rgba(26,22,22,.55); }
+  .feed-title{
+    font-family:var(--display); font-weight:500; font-size:clamp(24px,3vw,36px);
+    line-height:1.2; margin:14px 0 16px; max-width:900px; transition:color .2s ease;
+  }
+  .feed-item:hover .feed-title{ color:var(--seal-red); }
+  .feed-excerpt{
+    font-size:15.5px; line-height:1.85; color:rgba(26,22,22,.62); max-width:900px; margin:0;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+  }
 </style>
 </head>
 <body>
@@ -335,6 +356,16 @@
         <p class="page-lede">Representative outcomes and commentary from our team.</p>
       </div>
     </header>
+    <section class="section">
+      <p class="kicker">Latest</p>
+      <div class="feed">
+        <a class="feed-item" href="insights-ex-parte-attachment-defense.html">
+          <p class="feed-meta"><span class="feed-cat">Case Results</span><span class="feed-date">November 19, 2026</span></p>
+          <h2 class="feed-title">Shanze Partners Defeats $12 Million Ex Parte Writ of Attachment Application in Santa Clara County</h2>
+          <p class="feed-excerpt">Shanze Partners defeated a $12 million ex parte application for a writ of attachment in Santa Clara County Superior Court, with just 72 hours to respond. In a high-stakes contract dispute involving venture capital investment in the AI world, the plaintiff asked the court to freeze our client&rsquo;s assets by ex parte attachment motion without notice. If granted, the order could have shut the business down.</p>
+        </a>
+      </div>
+    </section>
     <section class="section">
       <p class="kicker">By the Numbers</p>
       <div class="stat-strip">
