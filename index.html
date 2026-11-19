@@ -453,9 +453,9 @@
           <h2 class="headline">Successfully secured a court order appointing a receiver with power to sell the judgment debtor's real property in an $8 million civil litigation matter</h2>
         </a>
 
-        <a class="story" href="#" data-bg="2">
-          <p class="eyebrow">Firm News</p>
-          <h2 class="headline">Obtained partial summary judgment in a Washington State Superior Court case and successfully secured entry of a partial final judgment of more than $200,000</h2>
+        <a class="story" href="insights-ex-parte-attachment-defense.html" data-bg="2">
+          <p class="eyebrow">Case Results</p>
+          <h2 class="headline">Shanze Partners Defeats $12 Million Ex Parte Writ of Attachment Application in Santa Clara County</h2>
         </a>
       </div>
 
@@ -493,7 +493,7 @@
   stories.forEach(story => {
     story.addEventListener('mouseenter', () => activate(story));
     story.addEventListener('focus',      () => activate(story));
-    story.addEventListener('click', (e) => { e.preventDefault(); activate(story); });
+    story.addEventListener('click', (e) => { if (story.getAttribute('href') === '#') e.preventDefault(); activate(story); });
   });
 </script>
 
