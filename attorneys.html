@@ -248,6 +248,9 @@
     width:100%; aspect-ratio:192/232; overflow:hidden; background:#fff;
   }
   .p-photo svg{ width:100%; height:100%; display:block; }
+  .p-photo img{ filter:grayscale(1); transition:filter .4s ease; }
+  .person:hover .p-photo img, .p-photo-link:focus-visible .p-photo img{ filter:grayscale(0); }
+  @media (hover:none){ .p-photo img{ filter:none; } }
   .p-info{
     background:var(--ink); color:var(--ivory);
     padding:26px 24px 28px;
@@ -387,7 +390,7 @@
       <div class="person">
         <a class="p-photo-link" href="attorney-clara-chen.html" aria-label="View profile: Siyuan (Clara) Chen">
 <div class="p-photo" style="background:#fff;">
-        <img src="images/clara-chen.png" alt="Siyuan (Clara) Chen" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="images/clara-chen.webp" alt="Siyuan (Clara) Chen" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
         </a>
         <div class="p-info">
