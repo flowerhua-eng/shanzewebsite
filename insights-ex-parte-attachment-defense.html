@@ -326,6 +326,27 @@
   }
   .article-back svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; }
   .article-back:hover{ color:var(--seal-red); }
+
+  .article-layout{ display:grid; grid-template-columns:minmax(0,760px) 280px; gap:64px; align-items:start; }
+  .article-side{ display:flex; flex-direction:column; gap:22px; }
+  .article-side .kicker{ margin-bottom:0; }
+  .contact-card{ display:block; text-decoration:none; color:var(--ink); border:1px solid rgba(26,22,22,.12); background:var(--paper); transition:box-shadow .22s ease, transform .22s ease; }
+  .contact-card:hover{ box-shadow:0 14px 30px rgba(26,22,22,.14); transform:translateY(-3px); }
+  .contact-card:focus-visible{ outline:2px solid var(--seal-red); outline-offset:2px; }
+  .cc-photo{ aspect-ratio:4/5; overflow:hidden; background:#fff; }
+  .cc-photo img{ width:100%; height:100%; object-fit:cover; object-position:50% 25%; display:block; }
+  .cc-info{ padding:16px 18px 18px; border-top:1px solid rgba(26,22,22,.08); }
+  .cc-name{ font-family:var(--display); font-weight:500; font-size:19px; line-height:1.2; }
+  .cc-role{ margin-top:5px; font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(26,22,22,.6); }
+  .cc-link{ margin-top:12px; display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--seal-red); }
+  .cc-link svg{ width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; }
+  @media (max-width:1100px){
+    .article-layout{ grid-template-columns:minmax(0,1fr); gap:44px; }
+    .article-side{ flex-direction:row; flex-wrap:wrap; }
+    .article-side .kicker{ width:100%; }
+    .contact-card{ width:calc(50% - 11px); max-width:300px; }
+  }
+  @media (max-width:520px){ .contact-card{ width:100%; max-width:none; } }
 </style>
 </head>
 <body>
@@ -365,6 +386,7 @@
       </div>
     </header>
     <section class="section">
+      <div class="article-layout">
       <article class="article">
         <p class="article-meta"><span class="article-cat">Case Results</span><span class="article-date">November 19, 2026</span></p>
         <p class="lead">Shanze Partners defeated a $12 million ex parte application for a writ of attachment in Santa Clara County Superior Court, with just 72 hours to respond.</p>
@@ -377,6 +399,26 @@
         <p class="disclaimer">Attorney advertising. Prior results do not guarantee a similar outcome.</p>
         <a class="article-back" href="insights.html"><svg viewBox="0 0 24 24"><line x1="20" y1="12" x2="5" y2="12"/><polyline points="11 6 5 12 11 18"/></svg> Back to Case Results &amp; Insights</a>
       </article>
+        <aside class="article-side" aria-label="Attorneys on this matter">
+          <p class="kicker">Contact</p>
+          <a class="contact-card" href="attorney-leo-wang.html" aria-label="View profile: Zhizhou (Leo) Wang">
+            <div class="cc-photo"><img src="images/leo-wang.webp" alt="Zhizhou (Leo) Wang"></div>
+            <div class="cc-info">
+              <div class="cc-name">Zhizhou (Leo) Wang</div>
+              <div class="cc-role">Managing Partner</div>
+              <div class="cc-link">View profile <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></div>
+            </div>
+          </a>
+          <a class="contact-card" href="attorney-echo-zhang.html" aria-label="View profile: Xinyuan (Echo) Zhang">
+            <div class="cc-photo"><img src="images/echo-zhang.webp" alt="Xinyuan (Echo) Zhang"></div>
+            <div class="cc-info">
+              <div class="cc-name">Xinyuan (Echo) Zhang</div>
+              <div class="cc-role">Associate Attorney</div>
+              <div class="cc-link">View profile <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></div>
+            </div>
+          </a>
+        </aside>
+      </div>
     </section>
   <footer>
     <div class="foot-bar">
